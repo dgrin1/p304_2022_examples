@@ -1,4 +1,4 @@
-wrd = input = ("Enter some word")
+wrd = input("Enter some word")
 wrd = str(wrd)
 
 check = len(wrd)
