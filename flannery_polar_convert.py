@@ -16,4 +16,4 @@ y2 = float(r2)*np.sin(float(theta2))
 x=x+x2
 y=y+y2
 
-print("The combined vecotr is x=",x,"and y=",y)
+print("The combined vector is x=",x,"and y=",y)
