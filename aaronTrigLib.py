@@ -63,7 +63,7 @@ def makCosCoefs(order):
     return cosCoefs
 
 # Runs upon library import 
-order = 10
+order = 100
 sinCoefs = makSinCoefs(order)
 cosCoefs = makCosCoefs(order)
 
