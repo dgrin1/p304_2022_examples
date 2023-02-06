@@ -1,0 +1,13 @@
+numbr=input("Number plz?")
+numbr_in=float(numbr)
+
+if(numbr_in==0): 
+	print("More plz")
+elif(numbr_in%numbr_in==1):
+	print("That's the same thing!")
+elif(numbr_in%2==0):
+	print("We are now even!")
+elif(numbr_in%2==1):
+	print("That's very odd")
+else:
+	print("Hell nah")
