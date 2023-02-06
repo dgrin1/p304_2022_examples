@@ -3,7 +3,7 @@ import numpy as np
 # plt.ion only works in interactive mode
 # plt.ion()
 plt.rc('text',usetex=True)
-plt.rc('font', family='sans-serif')
+plt.rc('font', family='serif',serif='Palatino')
 # plt.rc('font', sans-serif='Tahoma')
 
 
