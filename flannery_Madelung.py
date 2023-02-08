@@ -35,7 +35,7 @@ def whole_crystal_madelung_potential(x, y, z):
     return potential
 
 
-print(single_particle_madelung_potential(5, 5, 5, 2, 2, 1), "Coulombs?")
-print(whole_crystal_madelung_potential(5, 5, 5), "Coulombs?")
+print(single_particle_madelung_potential(5, 5, 5, 2, 2, 1), "Unitless?")
+print(whole_crystal_madelung_potential(5, 5, 5), "Unitless?")
 # print(whole_crystal_madelung_potential(50, 50, 50), "Coulombs?")  # WILL NOT RUN QUICKLY :)
 
