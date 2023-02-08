@@ -88,5 +88,3 @@ plt.plot(x,y_cot)
 plt.suptitle("Cot")
 plt.ylim(-5,5)
 plt.show()
-
-print("foo")
