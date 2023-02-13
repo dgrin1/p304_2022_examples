@@ -6,8 +6,10 @@ import numpy as np
 
 
 N = 100
-a = 60
-b = 0
+a = 0
+b = 60
+g = 9.8 #m/s
+m = 0.066 #kg
 
 ivec = range(0, N + 1)
 s = 0
@@ -16,7 +18,7 @@ h = float(b - a) / float(N)
 
 
 def f(x):
-    f = 9.8 * 0.066 * (x - 60)  # np.power(x, 4.e0) - 2. * x + 1.
+    f = m * g * (60 - x)  # np.power(x, 4.e0) - 2. * x + 1.
     return f
 
 
@@ -37,3 +39,4 @@ def trape(a, b, f, N):
 trape(a, b, f, N)
 
 print(s, trape(a, b, f, N))
+print("The work done is", trape(a,b,f,N), "J")
