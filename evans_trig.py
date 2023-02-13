@@ -42,29 +42,93 @@ def cotan(x,N):
 
 
 sin_y = []
-theta = np.linspace(0,4*np.pi, 100)
+theta = np.linspace(-2*np.pi,2*np.pi, 100)
 for n in theta:
-    res = sin(n, 60)
+    res = sin(n, 70)
     sin_y.append(res)
+    
+delta_sin = sin_y - np.sin(theta) 
 
 cos_y = []
-theta = np.linspace(0,4*np.pi, 100)
+theta = np.linspace(-2*np.pi,2*np.pi, 100)
 for n in theta:
     res = cos(n, 60)
     cos_y.append(res)
+
+delta_cos = cos_y - np.cos(theta)
+
+tan_y = []
+theta = np.linspace(-2*np.pi,2*np.pi, 100)
+for n in theta:
+    res = tan(n, 60)
+    tan_y.append(res)
+
+delta_tan = tan_y - np.tan(theta)
+
+csec_y = []
+theta = np.linspace(-2*np.pi,2*np.pi, 100)
+for n in theta:
+    res = csec(n, 60)
+    csec_y.append(res)
+
+delta_csec = tan_y - np.tan(theta)
+
+sec_y = []
+theta = np.linspace(-2*np.pi,2*np.pi, 100)
+for n in theta:
+    res = sec(n, 60)
+    sec_y.append(res)
+
+delta_sec = tan_y - np.tan(theta)
+
+cotan_y = []
+theta = np.linspace(-2*np.pi,2*np.pi, 100)
+for n in theta:
+    res = cotan(n, 60)
+    cotan_y.append(res)
+
+delta_cotan = cotan_y - np.tan(theta)
+
+"""Sin"""
 
 plt.subplot(211)
 
 plt.plot(theta, sin_y)
 
 
-plt.subplot(221)
+plt.subplot(212)
+
+plt.plot(theta, delta_sin)
+
+plt.show()
+
+"""Cos"""
+
+plt.subplot(211)
 
 plt.plot(theta, cos_y)
 
 
+plt.subplot(212)
+
+plt.plot(theta, delta_cos)
+
 plt.show()
 
+
+"""Tan"""
+
+
+plt.subplot(211)
+
+plt.plot(theta, tan_y)
+
+
+plt.subplot(212)
+
+plt.plot(theta, delta_tan)
+
+plt.show()
 
 
 
