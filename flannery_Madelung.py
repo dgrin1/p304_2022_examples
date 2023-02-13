@@ -3,6 +3,7 @@
 # Run this file from the command line, all functions are called in the executable.
 
 import numpy as np
+import matplotlib.pyplot as plt
 # epsilon_naught = 8.8541878128(13)*(10**(-12))  # Farads/Meter
 # e = 1.6022 * (10**(-19))  # coulombs per electron
 # A = 1  # update with actual value
@@ -31,11 +32,25 @@ def whole_crystal_madelung_potential(x, y, z):
         for b in range(y):
             for c in range(z):
                 potential += single_particle_madelung_potential(x, y, z, a, b, c)
-                print((a*b*c/(x*y*z)), "%")
     return potential
 
 
 print(single_particle_madelung_potential(5, 5, 5, 2, 2, 1), "Unitless?")
 print(whole_crystal_madelung_potential(5, 5, 5), "Unitless?")
 # print(whole_crystal_madelung_potential(50, 50, 50), "Coulombs?")  # WILL NOT RUN QUICKLY :)
+
+
+def plot_madelung_cubes(domain):
+    data = np.zeros(domain)
+    for i in range(domain):
+        data[i] = whole_crystal_madelung_potential(i, i, i)
+    plt.plot(np.linspace(0, domain, domain), data, marker=".", markersize="5")
+    plt.xlabel("Side Length of Square Crystal")
+    plt.ylabel("Madelung Unitless Potential")
+    plt.title("Madelung Crystal Potential Energy")
+    plt.show()
+
+
+plot_madelung_cubes(12)
+
 
