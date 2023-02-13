@@ -1,8 +1,10 @@
 from __future__ import print_function,division
 import numpy as np
+from flannery_trig import sin
+
 N=1000
 a=0
-b=2
+b=3*np.pi
 
 ivec=range(0,N+1)
 s=0
@@ -13,8 +15,13 @@ def f(x):
 	f=np.power(x,4.e0)-2.*x+1.
 	return f
 
+
+def f2(x):
+	f=np.sin(x)
+	return f
+
 for i in ivec:
-	s+=f(x)*h
+	s+=f2(x)*h
 	x=a+i*h
 
 def trape(a,b,f,N):
@@ -25,6 +32,6 @@ def trape(a,b,f,N):
 	s/=2.0
 	return s
 	
-trape(a,b,f,N)
+trape(a,b,f2,N)
 
-print(s,trape(a,b,f,N))
+print(s,trape(a,b,f2,N))

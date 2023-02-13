@@ -19,7 +19,6 @@ def sin(x):
         term=numerator/denominator
         sum+=term
     return sum
-print(sin(0.3))
 
 def cos(x):
     sum=0
@@ -33,15 +32,19 @@ def cos(x):
         term=numerator/denominator
         sum+=term
     return sum
-print(cos(0.3))
 
 def tan(x):
     tan=sin(x)/cos(x)
     return tan
-print(tan(0.3))
 
 def sec(x):
+   sec=cos(x)**-1
+   return sec
 
 def csc(x):
+   csc=sin(x)**-1
+   return csc
 
 def cot(x):
+   cot=cos(x)/sin(x)
+   return cot
