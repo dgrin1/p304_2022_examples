@@ -1,8 +1,8 @@
 from __future__ import print_function,division
 import numpy as np
-N=1000
-a=0
-b=2
+N=100
+a=-1*np.pi
+b=np.pi
 
 ivec=range(0,N+1)
 s=0
@@ -10,8 +10,10 @@ x=0
 h=float(b-a)/float(N)
 
 def f(x):
-	f=np.power(x,4.e0)-2.*x+1.
+	#f=np.power(x,4.e0)-2.*x+1.
+	f=np.cos(x**2)
 	return f
+
 
 for i in ivec:
 	s+=f(x)*h
