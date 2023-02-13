@@ -3,19 +3,23 @@
 # Aaron Xu 
 # Feb 2, 2023 
 ####################
+import numpy as np
 def sin(x): 
+    x = x % (2*3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706)
     arr = [0]*order
     for n in range(order):
         arr[n] = x**(2*n+1)
-    #print(arr)
+    print(arr)
     sin = sum([arrN * sinCoefsN for arrN, sinCoefsN in zip(arr,sinCoefs)])
+    #sin = np.dot(sinCoefs,arr)
     return sin
 
 def cos(x):
+    x = x % (2*3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706)
     arr = [0]*order
     for n in range(order):
         arr[n] = x**(2*n)
-    #print(arr)
+    print(arr)
     cos = sum([arrN * cosCoefsN for arrN, cosCoefsN in zip(arr,cosCoefs)])
     return cos
 
@@ -68,14 +72,14 @@ sinCoefs = makSinCoefs(order)
 cosCoefs = makCosCoefs(order)
 
 #Diagnostics
-""" print("Sin Coefficients")
+print("Sin Coefficients")
 print(sinCoefs)
-print(sin(1.45)) 
-print(cos(1.45))
-print(tan(1.45))
-print(csc(1.45))
-print(sec(1.45))
-print(cot(1.45)) """
+#print(sin(1.45)) 
+#print(cos(1.45))
+#print(tan(1.45))
+#print(csc(1.45))
+#print(sec(1.45))
+#print(cot(1.45)) """
 
 # Differences Generally emerge at the 14th or 15th decimal when order is 10
 # Mathematica    Sin(1.45) = 0.992712991037589

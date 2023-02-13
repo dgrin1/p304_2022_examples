@@ -1,7 +1,8 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 
-def factorial(x):  # fastest factorial function
+def factorial(x):  # fastest simple to read factorial function
     result = x
     for i in range(x-1, 1, -1):
         result = result * i
@@ -64,18 +65,38 @@ def cosh(x, nmax=50):
 
 
 def tanh(x, nmax=50):
-    return "undefined"
+    return sinh(x, nmax)*cosh(x, nmax)
+
 
 
 # test cases
-print(np.cos(0.3))
-print(cos(0.3))
-print(np.tan(1))
-print(tan(1))
-print(1/np.tan(1))
-print(cot(1))
-print(cosh(1))
-print(np.cosh(1))
+# print(np.cos(0.3))
+# print(cos(0.3))
+# print(np.tan(1))
+# print(tan(1))
+# print(1/np.tan(1))
+# print(cot(1))
+# print(cosh(1))
+# print(np.cosh(1))
+x = np.linspace(0, 10*np.pi, 1000)
+y1 = [sin(num) for num in x]
+y2 = [cos(num) for num in x]
+y3 = [tan(num) for num in x]
+y4 = [sinh(num) for num in x]
+y5 = [cosh(num) for num in x]
+y6 = [tanh(num) for num in x]
+plt.plot(x, y1, label="sin")
+plt.plot(x, y2, label="cos")
+# plt.plot(x, y3, label="tan")
+# plt.plot(x, y4, label="sinh")
+# plt.plot(x, y5, label="cosh")
+# plt.plot(x, y6, label="tanh")
+plt.xlabel("input")
+plt.ylabel("output")
+plt.ylim(-1, 1)
+plt.legend()
+plt.show()
+
 # print(recursive_factorial(5))
 # print(factorial(5))
 # print(sin(0.3, 7))
