@@ -1,7 +1,7 @@
 from __future__ import print_function,division
 import numpy as np
-N=10
-a=0
+N=1000
+a=0 
 b=2
 
 ivec=range(0,N+1)
@@ -10,7 +10,7 @@ x=0
 h=float(b-a)/float(N)
 
 def f(x):
-	f=np.power(x,4.e0)-2.*x+1.
+	f=x**5*np.cos(x**2)
 	return f
 
 
