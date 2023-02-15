@@ -27,8 +27,10 @@ T = np.zeros((len(x), len(y), len(z)))
 for n in range(len(x)):
     for m in range(len(y)):
         for k in range(len(z)):
-            T[n,m,k] = x[n]**2-y[m]**2
-#np.sin((x[n] - y[m])/3.0) + 0.3*np.cos(y[m]) + z[k]**2
+        	T[n,m,k] = np.sin((x[n] - y[m])/3.0) + 0.3*np.cos(y[m]) + z[k]**2
+
+        	#T[n,m,k] = (x[n]**2-y[n]**2)
+        #	T[n,m,k]=np.sin((x[n] - y[m])/3.0) + 0.3*np.cos(y[m]) + z[k]**2
 
 gx,gy,gz = grad(T)
 fig, ax = plt.subplots(figsize =(6, 6))
