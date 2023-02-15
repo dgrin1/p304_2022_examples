@@ -1,7 +1,10 @@
 #library of trig functions
 
 import numpy as np
-Nmax = 65
+import matplotlib.pyplot as plt
+Nmax = 5
+
+#functions time
 
 def factorial(x):
     if(x==1):
@@ -32,6 +35,7 @@ def cos(x):
         term=numerator/denominator
         sum+=term
     return sum
+    
 
 def tan(x):
     tan=sin(x)/cos(x)
@@ -48,3 +52,31 @@ def csc(x):
 def cot(x):
    cot=cos(x)/sin(x)
    return cot
+   
+   
+#plot time!
+   
+data = []
+error = []
+for n in range(0,100):
+    temp=(2*np.pi/100)*n
+    term=cos(temp)
+    Nmax=2*Nmax
+    temp2=(2*np.pi/100)*n
+    term2=cos(temp2)
+    Nmax=int((1/2)*Nmax)
+    print(term2-term)
+
+    
+#x=np.linspace(0,2*np.pi,100)
+#y=data
+
+
+#plt.ylim([-1.1,1.1])
+
+
+
+#plt.plot
+#plt.show()
+
+
