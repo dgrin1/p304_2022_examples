@@ -1,5 +1,5 @@
 import numpy as np
-nMax=5
+nMax=9
 
 def factorial (x):
     if(x==1 or x==0):

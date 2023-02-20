@@ -5,7 +5,7 @@ plt.rc('text',usetex=True)
 plt.rc('font', family='sans-serif')
 
 
-nmax = 65
+nmax = 20
 
 
 def factorial(x):
@@ -20,6 +20,17 @@ def sin(x):
     sum = 0
 
     for n in range(0, nmax + 1):
+        denominator = factorial(2 * n + 1)
+        numerator = ((-1) ** n) * (x ** (2 * n + 1))
+        term = numerator / denominator
+        sum += term
+
+    return (sum)
+
+def sin2nmax(x):
+    sum = 0
+
+    for n in range(0, 2*nmax + 1):
         denominator = factorial(2 * n + 1)
         numerator = ((-1) ** n) * (x ** (2 * n + 1))
         term = numerator / denominator
@@ -61,7 +72,11 @@ def cot(x):
 
 
 x = np.linspace(-2 * np.pi, 2 * np.pi, 200)
-y_sin = [sin(value) for value in x]
+y_sin_nmax = [sin(value) for value in x]
+y_sin_2nmax = [sin2nmax(value) for value in x]
+
+error = [max(x) * ((((y_sin_2nmax[i] - y_sin_nmax[i]) / (y_sin_nmax[i]))**2)**(1/2)) for i in range(len(y_sin_nmax))]
+
 y_cos = [cos(value) for value in x]
 y_tan = [tan(value) for value in x]
 y_sec = [sec(value) for value in x]
@@ -69,7 +84,7 @@ y_csc = [csc(value) for value in x]
 y_cot = [cot(value) for value in x]
 
 # plot sin
-plt.plot(x, y_sin, "r")
+plt.plot(x, y_sin_nmax, "r")
 plt.scatter(x, np.sin(x))
 plt.suptitle(r'$\sin{x}$ vs $x$')
 plt.xlabel(r'$x$')
