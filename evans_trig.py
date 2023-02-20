@@ -77,7 +77,7 @@ for n in theta:
     res = csec(n, 60)
     csec_y.append(res)
 
-delta_csec = tan_y - np.tan(theta)
+delta_csec = csec_y - (1/np.sin(theta))
 
 sec_y = []
 theta = np.linspace(-2*np.pi,2*np.pi, 100)
@@ -85,7 +85,7 @@ for n in theta:
     res = sec(n, 60)
     sec_y.append(res)
 
-delta_sec = tan_y - np.tan(theta)
+delta_sec = sec_y - 1/np.cos(theta)
 
 cotan_y = []
 theta = np.linspace(-2*np.pi,2*np.pi, 100)
@@ -93,7 +93,7 @@ for n in theta:
     res = cotan(n, 60)
     cotan_y.append(res)
 
-delta_cotan = cotan_y - np.tan(theta)
+delta_cotan = cotan_y - 1/np.tan(theta)
 
 """Sin"""
 
@@ -143,8 +143,47 @@ plt.plot(theta, delta_tan)
 
 plt.show()
 
+"""Cosec"""
 
 
+plt.subplot(211)
+
+plt.plot(theta, csec_y)
+
+
+plt.subplot(212)
+
+plt.plot(theta, delta_csec)
+
+plt.show()
+
+"""Sec"""
+
+
+plt.subplot(211)
+
+plt.plot(theta, sec_y)
+
+
+plt.subplot(212)
+
+plt.plot(theta, delta_sec)
+
+plt.show()
+
+"""Cotan"""
+
+
+plt.subplot(211)
+
+plt.plot(theta, cotan_y)
+
+
+plt.subplot(212)
+
+plt.plot(theta, delta_cotan)
+
+plt.show()
 
 
     
