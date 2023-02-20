@@ -3,14 +3,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def errorCalc(standardFunc,testFunc):
-	return lambda x: abs(standardFunc(x)-testFunc(x))
+	return lambda x, term: abs((standardFunc(x,term)-testFunc(x,term))/standardFunc(x,term))
 
-testSin = errorCalc(np.sin,atl.sin)
-testCos = errorCalc(np.cos,atl.cos)
-testTan = errorCalc(np.tan,atl.tan)
+testSin = errorCalc(atl.sin,atl.sin)
+testCos = errorCalc(atl.cos,atl.cos)
+testTan = errorCalc(atl.tan,atl.tan)
 
 t = np.transpose(np.arange(-2*np.pi,2*np.pi,0.01))
 #print(t)
+
+def findMaxErr(t,terms):
+	maxErrIndex = 0
+	errors = testSin(t,terms)
+	maxErrIndex = errors.index(max(errors))
+	return maxErrIndex
+
+
+
 
 #sinDat = list(map(atl.sin,t))
 sinDat = [atl.sin(tt) for tt in t]

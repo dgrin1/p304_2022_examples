@@ -1,4 +1,4 @@
-import trig_functions as mytrg
+import wharesch_trig_functions as mytrg
 import matplotlib.pyplot as plt
 import numpy as np
 

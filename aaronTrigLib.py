@@ -4,38 +4,38 @@
 # Feb 2, 2023 
 ####################
 import numpy as np
-def sin(x): 
+def sin(x,terms = 50): 
     x = x % (2*3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706)
-    arr = [0]*order
-    for n in range(order):
+    arr = [0]*order[0:terms]
+    for n in range(order[0:terms]):
         arr[n] = x**(2*n+1)
     print(arr)
-    sin = sum([arrN * sinCoefsN for arrN, sinCoefsN in zip(arr,sinCoefs)])
+    sin = sum([arrN * sinCoefsN for arrN, sinCoefsN in zip(arr,sinCoefs[0:terms])])
     #sin = np.dot(sinCoefs,arr)
     return sin
 
-def cos(x):
+def cos(x,terms = 50):
     x = x % (2*3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706)
-    arr = [0]*order
-    for n in range(order):
+    arr = [0]*order[0:terms]
+    for n in range(order[0:terms]):
         arr[n] = x**(2*n)
     print(arr)
-    cos = sum([arrN * cosCoefsN for arrN, cosCoefsN in zip(arr,cosCoefs)])
+    cos = sum([arrN * cosCoefsN for arrN, cosCoefsN in zip(arr,cosCoefs[0:terms])])
     return cos
 
-def tan(x):
-    tan = sin(x)/cos(x)
+def tan(x,terms = 50):
+    tan = sin(x,terms)/cos(x,terms)
     return tan
 
-def csc(x):
+def csc(x,terms = 50):
     cosec = 1/sin(x)
     return cosec
 
-def sec(x): 
+def sec(x,terms = 50): 
     sec = 1/cos(x)
     return sec
 
-def cot(x):
+def cot(x,terms = 50):
     cotan = 1/tan(x)
     return cotan
 
@@ -67,7 +67,7 @@ def makCosCoefs(order):
     return cosCoefs
 
 # Runs upon library import 
-order = 10
+order = 1000
 sinCoefs = makSinCoefs(order)
 cosCoefs = makCosCoefs(order)
 
