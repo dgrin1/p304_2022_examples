@@ -1,8 +1,8 @@
 from __future__ import print_function,division
 import numpy as np
-N=10 #setting number of piunts
-a=0 # setting limits of integrals
-b=2
+N=10 #setting number of points
+a=0 # setting limits of integrals, lower bound
+b=2 #upper bound
 
 
 ivec=range(0,N+1) #list of integers containing the indices of every points
