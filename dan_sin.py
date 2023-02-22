@@ -21,7 +21,7 @@ def sin_dan(x):
 	 sum+=term
  return sum
 	 #print(n,factorial)
-#print(sin_dan(0.3))
+
 
 def factorial(x):
 	if(x==1):	
@@ -29,8 +29,10 @@ def factorial(x):
 	else:
 		fac=x*factorial(x-1)
 	return fac	
+	
+print(sin_dan(0.3))
 
-print(factorial(5))
+#print(factorial(5))
 
 
 
