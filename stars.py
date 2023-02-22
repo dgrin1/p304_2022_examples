@@ -4,8 +4,12 @@ from numpy import loadtxt,array,dot,sqrt,cos,sin,linspace,log
 import numpy as np
 from math import pi
 
+
 import matplotlib.pyplot as plt
-plt.ion()
+plt.rc('font',**{'sans-serif','sans-serif':['Helvetica']})
+
+
+# plt.ion()
 data=loadtxt("stars.txt",float)
 x=data[:,0]
 y=data[:,1]
@@ -26,8 +30,8 @@ ysubs=y[subs]
 plt.scatter(xbetter,ybetter)
 plt.scatter(xsubs,ysubs,c="r")
 #sctter needs c=
-plt.show()
 plt.xlabel("Temperature in K")
 plt.ylabel("Magnitude")
 plt.xlim(0,13000)
 plt.ylim(-5,20)
+plt.show()
