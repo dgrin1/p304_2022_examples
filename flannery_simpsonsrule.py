@@ -3,6 +3,7 @@
 # Run this file from the command line, all functions are called in the executable.
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy as sp
 plotters = False
 plt.rc('text',usetex=True)
 plt.rc('font', family='serif',serif='Palatino')
@@ -29,22 +30,26 @@ def simpson_int(f, N, x_min, x_max):
     return (1/3)*h*(f(x_min) + f(x_max) + 4 * odd_sum + 2 * even_sum)
 
 
+# put the analytical third derivative here, until you figure out a numerical third dirivative
 def trip_prime(f, x):
     return -np.cos(x)
+    # return sp.misc.derivative(f, x, n=3, order=5, dx=1e-8)  # TODO implement flexible numpy numerical differentiation
 
 
 def simpson_error(f, x_min, x_max, N):
     x_range = x_max - x_min
     h = x_range / N
-    error = (1/180) * h**4 * (trip_prime(f, x_min)-trip_prime(f, x_max))
+    first_half = trip_prime(f, x_min)
+    second_half = trip_prime(f, x_max)
+    error = (1/180) * h**4 * first_half - second_half
     return error
 
 
-def plot_simp_error(N_min, N_max, x_min, x_max, points=50):
-    n_space = np.linspace(N_min, N_max, points)
+def plot_simp_error(f, N_max, x_min, x_max, points=50):
+    n_space = np.linspace(1, N_max, points)
     error_data = []
     for N in n_space:
-        error_data.append(abs(simpson_error(x_min, x_max, N)))
+        error_data.append(abs(simpson_error(f, x_min, x_max, N)))
     plt.plot(n_space, error_data)
     plt.xscale("log")
     plt.yscale("log")
@@ -56,4 +61,4 @@ def plot_simp_error(N_min, N_max, x_min, x_max, points=50):
 
 print("The integral of sin(x) from 0 to pi is ", simpson_int(sin, 1000, 0, np.pi))
 print("The integral of sin(x) from 0 to pi is ", simpson_int(sin, 1000, 0, np.pi))
-plot_simp_error(0, 1000, 0, np.pi, 1000)
+plot_simp_error(sin, 1000, 0, np.pi, 1000)
