@@ -33,6 +33,10 @@ def simpson_int(f, N, x_min, x_max):
 # put the analytical third derivative here, until you figure out a numerical third dirivative
 def trip_prime(f, x):
     return -np.cos(x)
+    # x_list = np.linspace(x-1, x+1, 1000)
+    # y_list = f(x)
+    # first_derivative = np.gradient(y_list, x_list)
+    # second_derivative =
     # return sp.misc.derivative(f, x, n=3, order=5, dx=1e-8)  # TODO implement flexible numpy numerical differentiation
 
 
