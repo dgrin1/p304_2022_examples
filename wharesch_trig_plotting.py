@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 x=np.linspace(0,2*np.pi)
-ysin=mytrg.sin_wharesch(x)
+ysin=mytrg.sin_wharesch(x,9)
 npsin=np.sin(x)
 ycos=mytrg.cos_wharesch(x)
 npcos=np.cos(x)

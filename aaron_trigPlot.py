@@ -8,6 +8,9 @@ def errorCalc(standardFunc,testFunc):
 testSin = errorCalc(atl.sin,atl.sin)
 testCos = errorCalc(atl.cos,atl.cos)
 testTan = errorCalc(atl.tan,atl.tan)
+testCsc = errorCalc(atl.csc,atl.csc)
+testSec = errorCalc(atl.sec,atl.sec)
+testCot = errorCalc(atl.cot,atl.cot)
 
 t = np.transpose(np.arange(-2*np.pi,2*np.pi,0.01))
 #print(t)
@@ -21,18 +24,21 @@ def findMaxErr(t,terms):
 
 
 
-#sinDat = list(map(atl.sin,t))
-sinDat = [atl.sin(tt) for tt in t]
-cosDat = [atl.cos(tt) for tt in t]
-tanDat = atl.tan(t)
-cscDat = atl.csc(t)
-secDat = atl.sec(t)
-cotDat = atl.cot(t)
+sinDat = list(map(atl.sin,t))
+sinDat = [atl.sin(tt,terms) for tt in t]
+cosDat = [atl.cos(tt,terms) for tt in t]
+tanDat = atl.tan(t,terms)
+cscDat = atl.csc(t,terms)
+secDat = atl.sec(t,terms)
+cotDat = atl.cot(t,terms)
 
-sinErr = testSin(t)
-cosErr = testCos(t)
-tanErr = testTan(t)
-
+N_max = 50
+sinErr = testSin(t,N_max)
+cosErr = testCos(t,N_max)
+tanErr = testTan(t,N_max)
+cscErr = testCsc(t,N_max)
+secErr = testSec(t,N_max)
+cotErr = testCot(t,N_max)
 
 plt.figure(1)
 plt.subplot(261)
@@ -72,15 +78,6 @@ plt.ylabel("Number")
 plt.xlim(0,2*np.pi)
 plt.ylim(-20.2,20.2)
 
-plt.subplot(267)
-plt.plot(t,sinErr, label = "Sin Err")
-plt.xlim(0,2*np.pi)
-plt.subplot(268)
-plt.plot(t,cosErr, label = "Cos Err")
-plt.xlim(0,2*np.pi)
-plt.subplot(269)
-plt.plot(t,tanErr, label = "Tan Err")
-plt.xlim(0,2*np.pi)
 
 
 
