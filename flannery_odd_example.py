@@ -1,3 +1,6 @@
+# Author: Seamus Flannery
+# Run this file from the command line, all functions are called in the executable.
+# Basic interactive program that tests various divisibilities
 numbr = float(input("What number would you like to assess?"))
 # could use regex to decide what to type this variable instead of imposing float and throwing errors on strings
 

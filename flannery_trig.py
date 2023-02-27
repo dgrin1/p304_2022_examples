@@ -1,3 +1,6 @@
+# Author: Seamus Flannery
+# Run this file from the command line, all functions are called in the executable.
+# This file is my trig function library and also has a series of tests and plots of the library.
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -119,7 +122,7 @@ def plot_sin_error():
     plt.show()
 
 
-plot_sin_error()
+# plot_sin_error()
 
 #
 # def plot_trig_error():

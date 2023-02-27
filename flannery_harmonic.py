@@ -1,3 +1,5 @@
+# Author: Seamus Flannery
+# Run this file from the command line, all functions are called in the executable.
 i = 0
 s = 0
 
