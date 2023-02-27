@@ -8,7 +8,7 @@ l = float(input("What is the displacement(m)?: "))
 m = float(input("What is the mass of the object(kg)?: "))
 N = 100
 a = 0
-b = 60
+b = l
 g = 9.8 #m/s
 
 ivec = range(0, N + 1)
