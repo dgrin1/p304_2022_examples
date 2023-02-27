@@ -6,20 +6,20 @@
 import numpy as np
 def sin(x,terms = 50): 
     x = x % (2*3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706)
-    arr = [0]*order[0:terms]
-    for n in range(order[0:terms]):
+    arr = [0]*terms
+    for n in range(terms):
         arr[n] = x**(2*n+1)
-    print(arr)
+    #print(arr)
     sin = sum([arrN * sinCoefsN for arrN, sinCoefsN in zip(arr,sinCoefs[0:terms])])
     #sin = np.dot(sinCoefs,arr)
     return sin
 
 def cos(x,terms = 50):
     x = x % (2*3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706)
-    arr = [0]*order[0:terms]
-    for n in range(order[0:terms]):
+    arr = [0]*terms
+    for n in range(terms):
         arr[n] = x**(2*n)
-    print(arr)
+    #print(arr)
     cos = sum([arrN * cosCoefsN for arrN, cosCoefsN in zip(arr,cosCoefs[0:terms])])
     return cos
 
@@ -72,8 +72,8 @@ sinCoefs = makSinCoefs(order)
 cosCoefs = makCosCoefs(order)
 
 #Diagnostics
-print("Sin Coefficients")
-print(sinCoefs)
+#print("Sin Coefficients")
+#print(sinCoefs)
 #print(sin(1.45)) 
 #print(cos(1.45))
 #print(tan(1.45))
