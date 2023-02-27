@@ -1,6 +1,8 @@
 from __future__ import print_function,division
 import numpy as np
 import matplotlib.pyplot as plt
+plt.rc('text',usetex=True)
+plt.rc('font', family='serif',serif='Palatino')
 
 def f(x):
     f=x**4-2*x+1
@@ -25,11 +27,17 @@ print(simpson(0,2,f,1000))
 
 error_list=[]
 N_list=[]
-for N in range (0,1000,2):
-    simspon1=simpson(0,2,f,N)
+for N in range (2,1000,2):
+    simpson1=simpson(0,2,f,N)
     simpson_better=simpson(0,2,f,N+2)
-    error=simpson_better-simpson1)/simpson1
+    error=(simpson_better-simpson1)/simpson1
     error_list.append(error)
     N_list.append(N)
     
 plt.plot(N_list,error_list)
+plt.title(r'Simpson Integration Error ',fontsize=24,color='k')
+plt.xlabel(r'Number of Points Used (N)')
+plt.ylabel(r'Error of Simpson Integral')
+plt.yscale('log')
+plt.xscale('log')
+plt.show()
