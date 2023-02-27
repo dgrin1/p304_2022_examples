@@ -1,3 +1,6 @@
+# Author: Seamus Flannery
+# Run this file from the command line, all functions are called in the executable.
+# converts two x and y coordinate points to polar points and adds them
 import numpy as np
 import sys
 

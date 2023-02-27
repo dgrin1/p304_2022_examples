@@ -1,6 +1,8 @@
 # Author: Seamus Flannery
 # Madelung Potential Class Example
 # Run this file from the command line, all functions are called in the executable.
+# This file finds the madelung potential of a particle in a crystal, and also sums that for each particle in a
+# crystal to find the entire crystal's madelung potential
 
 import numpy as np
 import matplotlib.pyplot as plt
