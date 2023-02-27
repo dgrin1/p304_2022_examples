@@ -45,7 +45,7 @@ ax.axis([-5, 5, -5, 5])
 ax.contour(Y, X, T[:,:,round(len(z)/2)], 64)
 
 #Make vector plot
-ax.quiver(Y, X, 10000000*gy[:,:,round(len(z)/2)], 10000000*gx[:,:,round(len(z)/2)])
+ax.quiver(Y, X, 1000000000*gy[:,:,round(len(z)/2)], 1000000000*gx[:,:,round(len(z)/2)])
 
 #plt.colorbar()
 plt.show()
