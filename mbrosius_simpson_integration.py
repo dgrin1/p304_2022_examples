@@ -44,7 +44,7 @@ for N in range (2,1000,2):
     
     #calculate error based on two values, add to list
     error=(simpson_better-simpson1)/simpson1
-    error_list.append(error)
+    error_list.append(np.abs(error))
     N_list.append(N)
     
     
