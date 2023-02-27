@@ -1,7 +1,6 @@
 # Author: Seamus Flannery
 # Run this file from the command line, all functions are called in the executable.
-# This file plots the error on my homemade sine function as compared to the numpy version,
-# as a function of N, the evaluation term
+# trapezoidal integration file
 from __future__ import print_function, division
 import numpy as np
 from flannery_trig import sin
