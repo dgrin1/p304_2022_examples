@@ -63,4 +63,7 @@ plt.figure(2)
 error = [abs(rei - trape) for rei,trape  in zip(result_cache_rei,result_cache_trape)]
 print(error)
 plt.loglog(range(1,N),error)
+plt.xlabel("log(N)")
+plt.ylabel("log(error)")
+plt.title("Error Between Reimansum method and trapezoidal method")
 plt.show()

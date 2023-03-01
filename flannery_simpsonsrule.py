@@ -1,6 +1,8 @@
 # Author: Seamus Flannery
 # Code Simpson's rule, eq. 5.10 in Newman, page 147
 # Run this file from the command line, all functions are called in the executable.
+# This file runs a simpson's rule integral on the sine function (hopefully updated to allow any function), and then
+# plots the simpson's rule error
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy as sp
@@ -11,7 +13,6 @@ plt.rc('font', family='serif',serif='Palatino')
 
 def sin(x):
     return np.sin(x)
-
 
 
 def simpson_int(f, N, x_min, x_max):
@@ -43,9 +44,7 @@ def trip_prime(f, x):
 def simpson_error(f, x_min, x_max, N):
     x_range = x_max - x_min
     h = x_range / N
-    first_half = trip_prime(f, x_min)
-    second_half = trip_prime(f, x_max)
-    error = (1/180) * h**4 * first_half - second_half
+    error = (1/180) * h**4 * (trip_prime(f, x_min) - trip_prime(f, x_max))
     return error
 
 

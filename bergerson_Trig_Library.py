@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from bergerson_integration import gaussint
+from bergerson_integration import trap
 
 plt.rc('text',usetex=True)
 plt.rc('font', family='sans-serif')
@@ -137,11 +139,29 @@ plt.ylabel(r'$\cot{x}$')
 plt.ylim(-5, 5)
 plt.show()
 
-# delta sin
-delta_sin = y_sin - np.sin(x)
-plt.plot(x, delta_sin)
-plt.suptitle(r'Sin $\Delta$')
-plt.ylim(-1, 1)
-plt.show()
+# # delta sin
+# delta_sin = y_sin - np.sin(x)
+# plt.plot(x, delta_sin)
+# plt.suptitle(r'Sin $\Delta$')
+# plt.ylim(-1, 1)
+# plt.show()
 
 print("foo")
+
+# I want to plot the integral of sin(x) as a function of x using Gaussian and Trap (for different N values)
+
+def f(x):
+    y = sin(x)
+    return y
+
+for i in range(1,10):
+    plt.plot(x,[trap(0, value, f, i) for value in x],"b")
+    plt.plot(x, [gaussint(0, value, f, i) for value in x],"r")
+    plt.suptitle(r'Trapezoidal (red) and Gaussian Quadrature (blue) methods of integration for $\sin{x}$')
+    plt.show()
+
+
+
+print("foo")
+
+
