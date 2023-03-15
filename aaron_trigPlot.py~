@@ -1,0 +1,16 @@
+import aaronTrigLib as atl
+import numpy as np
+import matplotlib.pyplot as plt
+
+t = range(10,0.1)
+
+sinDat = atl.sin(t)
+cosDat = atl.cos(t)
+tanDat = atl.tan(t)
+cscDat = atl.csc(t)
+secDat = atl.sec(t)
+cotDat = atl.sec(t)
+
+plt.plot(t,sinDat)
+
+plt.show()
