@@ -1,0 +1,5 @@
+numbr = input("What number would you like to assess?")
+if(numbr%2==1):
+    print("Your number is odd.")
+else:
+    print("Your number is even.")
