@@ -10,6 +10,8 @@ def g(x):
 	return exp(1.-power(x,2.e0))
 def h(x):
 	return sqrt(1.e0-log(x))
+def w(x):
+        return 1.-0.5*np.sinh(x)
 	
 eps=2
 x=eps
@@ -20,7 +22,7 @@ i=0
 iarr=[i]
 #cap is put in there to make sure code doesn't take forever
 while (eps>eps_target and i<500):
-	x=h(x)
+	x=w(x)
 	eps=abs(x-xold)
 #setting the new comparison case to last guees
 	xold=x
@@ -30,7 +32,10 @@ while (eps>eps_target and i<500):
 	xarr.append(x)
 	
 print(x,eps_target)
+print(1-0.5*np.sinh(x)-x)
 plt.xlim(1,10)
-plt.ion()
+#plt.ion()
 plt.plot(iarr,xarr)
 plt.show()
+
+#x=1-0.5sinhx
