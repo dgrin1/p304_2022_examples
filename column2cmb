@@ -1,0 +1,4 @@
+from scipy.interpolate import interp1d,lagrange
+import numpy as np
+
+np.loadtext()
