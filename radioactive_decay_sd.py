@@ -6,6 +6,8 @@ l = 1.2*10**(-4)
 
 def f(x):
     return -l*x #operating on the differential equation
+def g(t):
+    return N_o*np.exp(-l*t)
 
 #initial conditions
 a = 0.0
@@ -25,7 +27,10 @@ for t in tpoints:
     k4 = h*f(x+k3)
     x += (k1+2*k2+2*k3+k4)/6
 
+ypoints = np.linspace(a, b, 25)
+
 plt.plot(tpoints,xpoints)
+plt.scatter(tpoints,ypoints)
 plt.xlabel("theta")
 plt.ylabel("y(t)")
 plt.show()
