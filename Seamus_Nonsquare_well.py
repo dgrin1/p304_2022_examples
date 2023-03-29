@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# my program to plot the phi for different E
+# my program to plot the phi for different E  values
 
 # Constants
 m = 9.1094e-31     # Mass of electron
