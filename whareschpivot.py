@@ -10,19 +10,19 @@ A = array([[ 0,  1,  4,  1 ],
 v = array([ -4, 3, 9, 7 ],float)
 N = len(v)
 
-largestValue=0
-largestRow=0
-
 #for each diagonal element equal to 0
 for m in range(v.size):
     if A[m,m]==0:
 
+        largestValue=0
+        largestRow=0
+        
         #save the row and value of the highest element in that column
-        for n in range(v.size):
-            value=A[n,m]
+        for r in range(v.size):
+            value=A[r,m]
             if value>largestValue:
                 largestValue=value
-                largestRow=n
+                largestRow=r
 
         #swap row m and row largestRow 
         for n in range(v.size):
