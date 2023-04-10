@@ -20,8 +20,8 @@ for m in range(v.size):
         #save the row and value of the highest element in that column
         for r in range(v.size):
             value=A[r,m]
-            if value>largestValue:
-                largestValue=value
+            if abs(value)>largestValue:
+                largestValue=abs(value)
                 largestRow=r
 
         #swap row m and row largestRow 
