@@ -1,4 +1,6 @@
 from numpy import array,arange
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Constants
 m = 9.1094e-31     # Mass of electron
@@ -36,13 +38,26 @@ def solve(E):
     return r[0]
 
 # Main program to find the energy using the secant method
-E1 = 0.0
-E2 = e
-psi2 = solve(E1)
+# E1 = 0.0
+# E2 = e
+# psi2 = solve(E1)
+#
+# target = e/1000
+# while abs(E1-E2)>target:
+#     psi1,psi2 = psi2,solve(E2)
+#     E1,E2 = E2,E2-psi2*(E2-E1)/(psi2-psi1)
+#
+# print("E =",E2/e,"eV")
 
-target = e/1000
-while abs(E1-E2)>target:
-    psi1,psi2 = psi2,solve(E2)
-    E1,E2 = E2,E2-psi2*(E2-E1)/(psi2-psi1)
+energy = []
+psi = []
 
-print("E =",E2/e,"eV")
+for i in np.linspace(50,5000,500):
+    psi2 = solve(i*e)
+    energy.append(i)
+    psi.append(psi2)
+
+plt.plot(energy,psi)
+plt.show()
+
+print("foo")
