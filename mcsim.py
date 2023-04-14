@@ -5,7 +5,7 @@ from matplotlib.pyplot import plot,ylabel,show
 
 T = 10.0 #Temperature
 N = 1000 #This specifies how many particles, E_i=
-steps = 2500000
+steps = 250000
 
 # Create a 2D array to store the quantum numbers
 #number of particles by 3 spatial dimensions
