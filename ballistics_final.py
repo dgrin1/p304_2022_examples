@@ -9,7 +9,7 @@ omega = 1800 # rpm
 g = 9.81 #m/s
 
 def F_v(v):
-    F_v = 0.0039 + (0.0058/(1+(np.exp(v-35))/5))
+    F_v = 0.0039 + (0.0058/(1+((np.exp(v-35))/5)))
     return(F_v)
 
 def pitch(r,t):
@@ -25,9 +25,9 @@ def pitch(r,t):
     dx = v_x
     dy = v_y
     dz = v_z
-    dv_x = -F_v(speed)*v_x + B*omega*(v_z*sin(phi)-v_y*cos(phi))
-    dv_y = -F_v(speed)*v_y + B*omega*v_x*cos(phi)
-    dv_z = -g-F_v(speed)*v_z + B*omega*v_x*sin(phi)
+    dv_x = -F_v(v_x)*v_x + B*omega*(v_z*sin(phi)-v_y*cos(phi))
+    dv_y = -F_v(v_y)*v_y + B*omega*v_x*cos(phi)
+    dv_z = -g-F_v(v_z)*v_z + B*omega*v_x*sin(phi)
     r = np.array([dx,dy,dz,dv_x,dv_y,dv_z,theta,phi],float)
     return (r)
 
@@ -41,9 +41,9 @@ ypoints = []
 xpoints = []
 
 # initial conditions for fastball
-v_0 = 35 # m/s
+v_0 = 85 # m/s
 theta = 1 * np.pi/180 # radians
-phi = 225 * np.pi/180
+phi = 225 * np.pi/180 #radians
 position = [0,0,0]
 velocity = [v_0*cos(theta),0,v_0*sin(theta)]
 
