@@ -27,9 +27,9 @@ def pitch(r,t):
     dx = v_x
     dy = v_y
     dz = v_z
-    dv_x = -F(v_x) * v_x + B * omega * (v_z * sin(phi) - v_y * cos(phi))
-    dv_y = -F(v_y) * v_y + B * omega * v_x * cos(phi)
-    dv_z = -g - F(v_z) * v_z + B * omega * v_x * sin(phi)
+    dv_x = -F(v_x) * v_x + B * omega_vec[0] * (v_z * sin(phi) - v_y * cos(phi))
+    dv_y = -F(v_y) * v_y + B * omega_vec[1] * v_x * cos(phi)
+    dv_z = -g - F(v_z) * v_z + B * omega_vec[2] * v_x * sin(phi)
     r = np.array([dx,dy,dz,dv_x,dv_y,dv_z,theta,phi],float)
     return (r)
 
@@ -47,6 +47,7 @@ theta = 1 * np.pi/180 # radians
 phi = 225 * np.pi/180
 position = [0,0,0]
 velocity = [v_0*cos(theta),0,v_0*sin(theta)]
+omega_vec = [omega*0,omega*sin(phi),omega*cos(phi)]
 
 r = position + velocity
 r.append(theta)
