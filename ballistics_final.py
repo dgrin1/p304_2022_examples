@@ -6,17 +6,13 @@ from pylab import plot,xlabel,ylabel,show
 import numpy as np
 
 B = 4.1e-4
-omega = 20 * 0.1047198 # rpm
+omega = 1800 * 0.1047198 # rpm
 g = 9.81 #m/s
 l = 18.44
 
 def F(v):
     F = 0.0039 + (0.0058/(1+((np.exp(v-35))/5)))
     return(F)
-
-def G(phi):
-    G = 0.5 * (sin(4*phi) - 0.25 * sin(8*phi) + 0.08 * sin(12*phi) - 0.025 * sin(16*phi))
-    return(G)
 
 def pitch(r,t):
     x = r[0]
@@ -25,32 +21,263 @@ def pitch(r,t):
     v_x = r[3]
     v_y = r[4]
     v_z = r[5]
-    phi = r[6]
     speed = np.sqrt(v_x**2+v_y**2+v_z**2)
     dx = v_x
     dy = v_y
     dz = v_z
-    dv_x = -F(speed) *speed * v_x
-    dv_y = -F(speed) *speed * v_y + g * G(phi)
-    dv_z = -g - F(speed) *speed * v_z
-    dphi = omega
-    r = np.array([dx,dy,dz,dv_x,dv_y,dv_z,dphi],float)
+    dv_x = (-F(speed) *speed * v_x) + (B * omega * (v_z * sin(phi) - v_y * cos(phi)))
+    dv_y = (-F(speed) *speed * v_y) + (B * omega * v_x * cos(phi))
+    dv_z = (-g - F(speed) *speed * v_z) - (B * omega * v_x * sin(phi))
+    r = np.array([dx,dy,dz,dv_x,dv_y,dv_z],float)
+    return (r)
+
+
+
+# initial conditions for curveball
+v_0 = 85 * 0.44704 # m/s
+theta = 1 * np.pi/180 # radians
+phi = 45 * np.pi/180
+position = [0,0,0]
+velocity = [v_0*cos(theta),0,v_0*sin(theta)]
+
+r = position + velocity
+
+r = np.array(r,float)
+# r = [x position, y position, z position, x velocity, y velocity, z velocity, theta, phi]
+
+a = 0.0
+b = l/v_0
+N = 1000
+h = (b-a)/N
+tpoints = arange(a,b,h)
+
+# y vs x for curveball
+# reset initial conditions
+
+r_xy = r.copy()
+r_xz = r.copy()
+
+xpoints_y = []
+ypoints = []
+
+for t in tpoints:
+    xpoints_y.append(r_xy[0])
+    ypoints.append(r_xy[1])
+    k1 = h*pitch(r_xy,t)
+    k2 = h*pitch(r_xy+0.5*k1,t+0.5*h)
+    k3 = h*pitch(r_xy+0.5*k2,t+0.5*h)
+    k4 = h*pitch(r_xy+k3,t+h)
+    r_xy += (k1+2*k2+2*k3+k4)/6
+
+#z vs x for curveball
+# reset initial conditions
+
+xpoints_z = []
+zpoints = []
+
+for t in tpoints:
+    xpoints_z.append(r_xz[0])
+    zpoints.append(r_xz[2])
+    k1 = h*pitch(r_xz,t)
+    k2 = h*pitch(r_xz+0.5*k1,t+0.5*h)
+    k3 = h*pitch(r_xz+0.5*k2,t+0.5*h)
+    k4 = h*pitch(r_xz+k3,t+h)
+    r_xz += (k1+2*k2+2*k3+k4)/6
+
+plot(xpoints_z,zpoints,label = "z")
+plot(xpoints_y,ypoints,label = "y")
+plt.suptitle("Trajectory of a Curveball")
+plt.xlim(0, 18)
+plt.ylim(-1.25,0.65)
+ylabel(r'Displacement in the $yz$-plane (meters)')
+xlabel(r'Displacement along the x-axis (meters')
+plt.legend()
+plt.savefig("Curveball")
+show()
+
+from math import sin,cos
+
+import matplotlib.pyplot as plt
+from numpy import arange
+from pylab import plot,xlabel,ylabel,show
+import numpy as np
+from matplotlib.animation import FuncAnimation
+
+## Imports with a few new libraries you haven't seen before
+import numpy as np
+# import SDutils
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from matplotlib import rc # Useful for control linestyles and plot markers
+from IPython.display import HTML
+rc('animation', html='html5')
+
+import matplotlib.animation as animation
+print(animation.writers.list())
+
+
+B = 4.1e-4
+omega = 1800 * 0.1047198 # rpm
+g = 9.81 #m/s
+l = 18.44
+
+def F(v):
+    F = 0.0039 + (0.0058/(1+((np.exp(v-35))/5)))
+    return(F)
+
+def pitch(r,t):
+    x = r[0]
+    y = r[1]
+    z = r[2]
+    v_x = r[3]
+    v_y = r[4]
+    v_z = r[5]
+    speed = np.sqrt(v_x**2+v_y**2+v_z**2)
+    dx = v_x
+    dy = v_y
+    dz = v_z
+    dv_x = (-F(speed) *speed * v_x) + (B * omega * (v_z * sin(phi) - v_y * cos(phi)))
+    dv_y = (-F(speed) *speed * v_y) + (B * omega * v_x * cos(phi))
+    dv_z = (-g - F(speed) *speed * v_z) - (B * omega * v_x * sin(phi))
+    r = np.array([dx,dy,dz,dv_x,dv_y,dv_z],float)
+    return (r)
+
+
+
+# initial conditions for fastball
+v_0 = 95 * 0.44704 # m/s
+theta = 1 * np.pi/180 # radians
+phi = 225 * np.pi/180
+position = [0,0,0]
+velocity = [v_0*cos(theta),0,v_0*sin(theta)]
+
+r = position + velocity
+
+r = np.array(r,float)
+# r = [x position, y position, z position, x velocity, y velocity, z velocity, theta, phi]
+
+a = 0.0
+b = l/v_0
+N = 1000
+h = (b-a)/N
+tpoints = arange(a,b,h)
+
+# y vs x for fastball
+# reset initial conditions
+
+r_xy = r.copy()
+r_xz = r.copy()
+
+xpoints_y = []
+ypoints = []
+
+for t in tpoints:
+    xpoints_y.append(r_xy[0])
+    ypoints.append(r_xy[1])
+    k1 = h*pitch(r_xy,t)
+    k2 = h*pitch(r_xy+0.5*k1,t+0.5*h)
+    k3 = h*pitch(r_xy+0.5*k2,t+0.5*h)
+    k4 = h*pitch(r_xy+k3,t+h)
+    r_xy += (k1+2*k2+2*k3+k4)/6
+
+#z vs x for fastball
+# reset initial conditions
+
+xpoints_z = []
+zpoints = []
+
+for t in tpoints:
+    xpoints_z.append(r_xz[0])
+    zpoints.append(r_xz[2])
+    k1 = h*pitch(r_xz,t)
+    k2 = h*pitch(r_xz+0.5*k1,t+0.5*h)
+    k3 = h*pitch(r_xz+0.5*k2,t+0.5*h)
+    k4 = h*pitch(r_xz+k3,t+h)
+    r_xz += (k1+2*k2+2*k3+k4)/6
+
+plot(xpoints_z,zpoints,label = "z")
+plot(xpoints_y,ypoints,label = "y")
+plt.suptitle("Trajectory of a Fastball")
+plt.xlim(0, 18)
+plt.ylim(-1.25,0.65)
+ylabel(r'Displacement in the $yz$-plane (meters)')
+xlabel(r'Displacement along the x-axis (meters')
+plt.legend()
+plt.savefig("Fastball")
+show()
+
+
+number_of_frames=30# Number of frames in the animation
+fig, ax = plt.subplots(1, 1, figsize=(10, 6));  # creating figures and axis objects
+# ax = SDutils.plotparams(ax);
+ax.set_xlim(0, 18);   # Notice you can use axis methods set_xlim and xet_ylim to modify the axis now
+ax.set_ylim(-1.25,0.65);
+line, = ax.plot([], [], lw=3, ls='-', color='xkcd:aqua', marker='o'); # plot
+
+# Let's make sure I can animate it the same way:
+def animate(i):  # Define an animation function that returns a "line" object that
+    # represents one frame of the movie
+    x = xpoints_y
+    y = ypoints[i]
+    line.set_data(x,y)
+    return line,
+
+def init():   #  Initializing function - it'll look like this every time, so I'm
+    # not going to talk about this.  Just use it just like this!
+    line.set_data([],[])
+    return line,
+
+anim = FuncAnimation(fig, animate, init_func=init, frames=number_of_frames,
+                     interval=10, blit=True, save_count=0);
+
+print("foo")
+
+from math import sin,cos
+
+import matplotlib.pyplot as plt
+from numpy import arange
+from pylab import plot,xlabel,ylabel,show
+import numpy as np
+
+B = 4.1e-4
+omega = 1800 * 0.1047198 # rpm
+g = 9.81 #m/s
+l = 18.44
+
+def F(v):
+    F = 0.0039 + (0.0058/(1+((np.exp(v-35))/5)))
+    return(F)
+
+def pitch(r,t):
+    x = r[0]
+    y = r[1]
+    z = r[2]
+    v_x = r[3]
+    v_y = r[4]
+    v_z = r[5]
+    speed = np.sqrt(v_x**2+v_y**2+v_z**2)
+    dx = v_x
+    dy = v_y
+    dz = v_z
+    dv_x = (-F(speed) *speed * v_x) + (B * omega * (v_z * sin(phi) - v_y * cos(phi)))
+    dv_y = (-F(speed) *speed * v_y) + (B * omega * v_x * cos(phi))
+    dv_z = (-g - F(speed) *speed * v_z) - (B * omega * v_x * sin(phi))
+    r = np.array([dx,dy,dz,dv_x,dv_y,dv_z],float)
     return (r)
 
 
 
 # initial conditions for screwball
-v_0 = 65 * 0.44704 # m/s
-theta = 4 * np.pi/180 # radians
-phi_0 = 22.5 * np.pi/180
+v_0 = 85 * 0.44704 # m/s
+theta = 1 * np.pi/180 # radians
+phi = 135 * np.pi/180
 position = [0,0,0]
 velocity = [v_0*cos(theta),0,v_0*sin(theta)]
 
 r = position + velocity
-r.append(phi_0)
 
 r = np.array(r,float)
-# r = [x position, y position, z position, x velocity, y velocity, z velocity, phi]
+# r = [x position, y position, z position, x velocity, y velocity, z velocity, theta, phi]
 
 a = 0.0
 b = l/v_0
@@ -61,70 +288,46 @@ tpoints = arange(a,b,h)
 # y vs x for screwball
 # reset initial conditions
 
-r0 = r.copy()
-r22 = r.copy()
-r45 = r.copy()
-r67 = r.copy()
+r_xy = r.copy()
+r_xz = r.copy()
 
-xpoints0 = []
-ypoints0 = []
+xpoints_y = []
+ypoints = []
 
 for t in tpoints:
-    xpoints0.append(r0[0])
-    ypoints0.append(r0[1])
-    k1 = h*pitch(r0,t)
-    k2 = h*pitch(r0+0.5*k1,t+0.5*h)
-    k3 = h*pitch(r0+0.5*k2,t+0.5*h)
-    k4 = h*pitch(r0+k3,t+h)
-    r0 += (k1+2*k2+2*k3+k4)/6
+    xpoints_y.append(r_xy[0])
+    ypoints.append(r_xy[1])
+    k1 = h*pitch(r_xy,t)
+    k2 = h*pitch(r_xy+0.5*k1,t+0.5*h)
+    k3 = h*pitch(r_xy+0.5*k2,t+0.5*h)
+    k4 = h*pitch(r_xy+k3,t+h)
+    r_xy += (k1+2*k2+2*k3+k4)/6
 
-xpoints22 = []
-ypoints22 = []
+#z vs x for screwball
+# reset initial conditions
 
-for t in tpoints:
-    xpoints22.append(r22[0])
-    ypoints22.append(r22[1])
-    k1 = h*pitch(r22,t)
-    k2 = h*pitch(r22+0.5*k1,t+0.5*h)
-    k3 = h*pitch(r22+0.5*k2,t+0.5*h)
-    k4 = h*pitch(r22+k3,t+h)
-    r22 += (k1+2*k2+2*k3+k4)/6
-
-xpoints45 = []
-ypoints45 = []
+xpoints_z = []
+zpoints = []
 
 for t in tpoints:
-    xpoints45.append(r45[0])
-    ypoints0.append(r45[1])
-    k1 = h*pitch(r45,t)
-    k2 = h*pitch(r45+0.5*k1,t+0.5*h)
-    k3 = h*pitch(r45+0.5*k2,t+0.5*h)
-    k4 = h*pitch(r45+k3,t+h)
-    r45 += (k1+2*k2+2*k3+k4)/6
+    xpoints_z.append(r_xz[0])
+    zpoints.append(r_xz[2])
+    k1 = h*pitch(r_xz,t)
+    k2 = h*pitch(r_xz+0.5*k1,t+0.5*h)
+    k3 = h*pitch(r_xz+0.5*k2,t+0.5*h)
+    k4 = h*pitch(r_xz+k3,t+h)
+    r_xz += (k1+2*k2+2*k3+k4)/6
 
-xpoints67 = []
-ypoints67 = []
-
-for t in tpoints:
-    xpoints67.append(r67[0])
-    ypoints0.append(r67[1])
-    k1 = h*pitch(r67,t)
-    k2 = h*pitch(r67+0.5*k1,t+0.5*h)
-    k3 = h*pitch(r67+0.5*k2,t+0.5*h)
-    k4 = h*pitch(r67+k3,t+h)
-    r67 += (k1+2*k2+2*k3+k4)/6
-
-plot(xpoints0,ypoints0,label = "0")
-plot(xpoints22,ypoints22,label = "22.5")
-plot(xpoints45,ypoints45,label = "45")
-plot(xpoints67,ypoints67,label = "67.5")
-plt.suptitle("Position of a Screwball Pitch")
+plot(xpoints_z,zpoints,label = "z")
+plot(xpoints_y,ypoints,label = "y")
+plt.suptitle("Trajectory of a Screwball")
 plt.xlim(0, 18)
 plt.ylim(-1.25,0.65)
 ylabel(r'Displacement in the $yz$-plane (meters)')
+xlabel(r'Displacement along the x-axis (meters')
 plt.legend()
+plt.savefig("Screwball")
 show()
-
 
 from math import sin,cos
 
@@ -213,9 +416,11 @@ for t in tpoints:
 
 plot(xpoints_z,zpoints,label = "z")
 plot(xpoints_y,ypoints,label = "y")
-plt.suptitle("Position of a Slider Pitch")
+plt.suptitle("Trajectory of a Slider")
 plt.xlim(0, 18)
 plt.ylim(-1.25,0.65)
 ylabel(r'Displacement in the $yz$-plane (meters)')
+xlabel(r'Displacement along the x-axis (meters')
 plt.legend()
+plt.savefig("Slider")
 show()
